@@ -6,7 +6,7 @@ function GameScreen() {
   const randomColor = getRandomColor()
 
   // get 3 random colors. differenceSum defines how equal/unequal they look.
-  const differenceSum = 50
+  const differenceSum = 61 // max 61
   const disguiseColors = getAllDisguiseColors(randomColor, differenceSum)
 
   // array with all 4 colors
@@ -147,8 +147,8 @@ function calcDisguiseColor (color, colorDiff) {
 function getAllDisguiseColors(color, differenceSum) {
   // get 3 color differences
   const colorDiff_1 = getRandomPointsToSum(differenceSum);
-  const colorDiff_2 = getRandomPointsToSum(differenceSum + 10);
-  const colorDiff_3 = getRandomPointsToSum(differenceSum + 20);
+  const colorDiff_2 = getRandomPointsToSum(2 * differenceSum);
+  const colorDiff_3 = getRandomPointsToSum(3* differenceSum);
 
   // return 3 different colors
   return [
