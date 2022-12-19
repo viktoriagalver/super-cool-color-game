@@ -13,6 +13,8 @@ function GameScreen() {
   let colorsInField = disguiseColors
   colorsInField.push(randomColor)
 
+  colorsInField = shuffleArray(colorsInField)
+
   return (
     <View style={styles.gameScreenContainer}>
       {/* Task and RGB color */}
