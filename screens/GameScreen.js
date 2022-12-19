@@ -36,6 +36,26 @@ function GameScreen() {
   );
 }
 
+// shuffles an array
+function shuffleArray(array) {
+  for (var i = array.length - 1; i > 0; i--) {
+    // Generate random number
+    var j = Math.floor(Math.random() * (i + 1));
+
+    var temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
+  }
+
+  return array;
+}
+
+// converts color object to rgb() string
+function colorObjectToString(color) {
+  const colorString = "rgb(" + color.r + "," + color.g + "," + color.b + ")"
+  return colorString
+}
+
 // function returns a random color object with r,g and b values between 0 and 255
 export function getRandomColor() {
   // Generate random color gradients between 0 and max 256 (excluding 256)
