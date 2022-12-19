@@ -1,4 +1,4 @@
-import ColorFieldButton from "../components/color-field-button";
+import ColorFieldButton from "../components/ColorFieldButton";
 import { View, StyleSheet, Text } from "react-native";
 
 function GameScreen() {
@@ -36,27 +36,7 @@ function GameScreen() {
   );
 }
 
-// shuffles an array
-function shuffleArray(array) {
-  for (var i = array.length - 1; i > 0; i--) {
-    // Generate random number
-    var j = Math.floor(Math.random() * (i + 1));
-
-    var temp = array[i];
-    array[i] = array[j];
-    array[j] = temp;
-  }
-
-  return array;
-}
-
-// converts color object to rgb() string
-function colorObjectToString(color) {
-  const colorString = "rgb(" + color.r + "," + color.g + "," + color.b + ")"
-  return colorString
-}
-
-// Generate a random color object with r,g and b values between 0 and 255
+// function returns a random color object with r,g and b values between 0 and 255
 function getRandomColor() {
   // Generate random color gradients between 0 and max 256 (excluding 256)
   const red = Math.floor(Math.random() * 256);
@@ -159,7 +139,7 @@ function getAllDisguiseColors(color, differenceSum) {
 }
 
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   gameScreenContainer: {
     height: "100%",
     display: "flex",
