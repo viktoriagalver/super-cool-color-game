@@ -2,6 +2,14 @@ import ColorFieldButton from "../components/ColorFieldButton";
 import { View, StyleSheet, Text } from "react-native";
 
 function GameScreen() {
+  // check whether user input is right or wring 
+  const handlePress = (color) => {
+    if(color === randomColor) {
+      console.log("WIN!!!")
+    } else {
+      console.log("LOOSE!!!")
+    }
+  }
   // get a random color to look for
   const randomColor = getRandomColor()
 
@@ -29,10 +37,30 @@ function GameScreen() {
 
       {/* Color Selection Field */}
       <View style={styles.colorField}>
-        <ColorFieldButton color={colorObjectToString(colorsInField[0])} />
-        <ColorFieldButton color={colorObjectToString(colorsInField[1])} />
-        <ColorFieldButton color={colorObjectToString(colorsInField[2])} />
-        <ColorFieldButton color={colorObjectToString(colorsInField[3])} />
+        <ColorFieldButton
+          handlePress={() => {
+            handlePress(colorsInField[0]);
+          }}
+          color={colorObjectToString(colorsInField[0])}
+        />
+        <ColorFieldButton
+          handlePress={() => {
+            handlePress(colorsInField[1]);
+          }}
+          color={colorObjectToString(colorsInField[1])}
+        />
+        <ColorFieldButton
+          handlePress={() => {
+            handlePress(colorsInField[2]);
+          }}
+          color={colorObjectToString(colorsInField[2])}
+        />
+        <ColorFieldButton
+          handlePress={() => {
+            handlePress(colorsInField[3]);
+          }}
+          color={colorObjectToString(colorsInField[3])}
+        />
       </View>
     </View>
   );
