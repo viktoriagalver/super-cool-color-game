@@ -1,6 +1,8 @@
 import { Text, View } from "react-native";
 import { getRandomColor, styles } from "./GameScreen";
 import ColorFieldButton from "../components/ColorFieldButton";
+import ColorInputField from "../components/ColorInputField";
+import Button from "../components/Button";
 
 function GameScreen2() {
   // get a random color to look for
@@ -18,6 +20,7 @@ function GameScreen2() {
         </Text>
         <ColorFieldButton color={randomRGB} />
       </View>
+      <ColorInputField />
   </View>
   );
 };
