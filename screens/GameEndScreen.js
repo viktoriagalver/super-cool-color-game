@@ -2,10 +2,14 @@ import { Text, StyleSheet, Pressable } from "react-native";
 
 function GameEndScreen(props) {
   let content;
+  let streak;
+
   if (props.win) {
-    content = "Win!!! \n Your Streak is " + props.streak.toString();
+    content = "That's right! :)";
+    streak = props.streak
   } else {
-    content = "You loose ... \n Keep practicing!!!";
+    content = "That's wrong ...";
+    streak = ":("
   }
   return (
     <Pressable
@@ -13,6 +17,7 @@ function GameEndScreen(props) {
       onPress={props.handlePress}
     >
       <Text style={styles.text}>{content}</Text>
+      <Text style={styles.streak}>{streak}</Text> 
     </Pressable>
   );
 }
@@ -27,7 +32,12 @@ const styles = StyleSheet.create({
   },
   text: {
     color: "#ffffff",
+    fontSize: 24
   },
+  streak: {
+    margin: 16,
+    fontSize: 48
+  }
 });
 
 export default GameEndScreen;
