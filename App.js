@@ -3,9 +3,11 @@ import { StyleSheet, View } from "react-native";
 import GameScreen from "./screens/GameScreen";
 import GameScreen2 from "./screens/GameScreen2";
 import GameEndScreen from "./screens/GameEndScreen";
+import StartScreen from "./screens/StartScreens";
 import { useState } from "react";
 
 export default function App() {
+  <StartScreen />
   const [currentScreen, setCurrentScreen] = useState("GameScreen1"); //enter the start screen into the useState() function
   const [game1Win, setGame1Win] = useState(null);
   const [game1Streak, setGame1Streak] = useState(0);
