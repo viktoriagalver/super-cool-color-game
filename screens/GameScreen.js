@@ -13,7 +13,8 @@ function GameScreen(props) {
     }
   }
   // get a random color to look for
-  const randomColor = props.getRandomColor
+  const randomColor = getRandomColor()
+  props.targetColor(colorObjectToString(randomColor))
 
   // get 3 random colors. differenceSum defines how equal/unequal they look.
   const differenceSum = 61 // max 61
@@ -86,6 +87,20 @@ function shuffleArray(array) {
 function colorObjectToString(color) {
   const colorString = "rgb(" + color.r + "," + color.g + "," + color.b + ")"
   return colorString
+}
+
+// function returns a random color object with r,g and b values between 0 and 255
+export function getRandomColor() {
+  // Generate random color gradients between 0 and max 256 (excluding 256)
+  const red = Math.floor(Math.random() * 256);
+  const green = Math.floor(Math.random() * 256);
+  const blue = Math.floor(Math.random() * 256);
+
+  return {
+    r: red,
+    g: green,
+    b: blue
+  }
 }
 
 // Get random numbers that add up to a given sum

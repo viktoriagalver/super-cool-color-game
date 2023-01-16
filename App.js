@@ -39,7 +39,7 @@ export default function App() {
   };
 
   // triggers after the user selects a color
-  const handleFinihsedGame1 = (win) => {
+  const handleFinisedGame1 = (win) => {
     if (win) {
       // set feedback for Game End Screen
       setGame1Win(true);
@@ -79,6 +79,11 @@ export default function App() {
       console.log("ERROR (getHighScore): ", error);
     }
   }
+  const getGame1TargetColor = (color) => {
+    console.log(color)
+    // TODO: solve infinite loop bug
+    // setGame1TargetColor(color)
+  }
 
   // manages the different app screens. The variable "currentScreen" defines the screen to be shown
   switch (currentScreen) {
@@ -86,9 +91,11 @@ export default function App() {
       currentScreenJSX = (
         <GameScreen
           wonGame1={(win) => {
-            handleFinihsedGame1(win);
+            handleFinisedGame1(win);
           }}
-          getRandomColor={getRandomColor()}
+          targetColor={(color) => {
+            getGame1TargetColor(color)
+          }}
         />
       );
       break;
@@ -98,7 +105,6 @@ export default function App() {
           color={"#000000"} //TODO: add color that the player is searching
           win={game1Win}
           streak={game1Streak}
-          highScore={game1HighScore}
           handlePress={() => {
             handleGameEndScreenPress();
           }}
@@ -106,7 +112,7 @@ export default function App() {
       );
       break;
     case "GameScreen2":
-      currentScreenJSX = <GameScreen2 color={randomColor} />;
+      currentScreenJSX = <GameScreen2 />;
       break;
   }
 
@@ -117,7 +123,7 @@ export default function App() {
       <StatusBar style="auto" />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -125,5 +131,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
-  },
-});
+  }
+})
+
