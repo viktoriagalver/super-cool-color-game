@@ -3,12 +3,11 @@ import { StyleSheet, View } from "react-native";
 import GameScreen from "./screens/GameScreen";
 import GameScreen2 from "./screens/GameScreen2";
 import GameEndScreen from "./screens/GameEndScreen";
-import StartScreen from "./screens/StartScreens";
+import StartScreen from "./screens/StartScreen";
 import { useState } from "react";
 
 export default function App() {
-  <StartScreen />
-  const [currentScreen, setCurrentScreen] = useState("GameScreen1"); //enter the start screen into the useState() function
+  const [currentScreen, setCurrentScreen] = useState("StartScreen"); //enter the start screen into the useState() function
   const [game1Win, setGame1Win] = useState(null);
   const [game1Streak, setGame1Streak] = useState(0);
   const [game1TargetColor, setGame1TargetColor] = useState(null);
@@ -16,6 +15,13 @@ export default function App() {
   let currentScreenJSX;
   console.log("Render: ", currentScreen);
 
+  const handleGame1ButtonPress = () => {
+    setCurrentScreen("GameScreen1");
+    console.log("HAllo");
+  };
+  const handleGame2ButtonPress = () => {
+    setCurrentScreen("GameScreen2");
+  };
   // triggers after user presses on end screen of game 1
   const handleGameEndScreenPress = () => {
     // start new game
@@ -38,13 +44,21 @@ export default function App() {
   };
 
   const getGame1TargetColor = (color) => {
-    console.log(color)
+    console.log(color);
     // TODO: solve infinite loop bug
     // setGame1TargetColor(color)
-  }
+  };
 
   // manages the different app screens. The variable "currentScreen" defines the screen to be shown
   switch (currentScreen) {
+    case "StartScreen":
+      currentScreenJSX = (
+        <StartScreen
+          onButton1Press={handleGame1ButtonPress}
+          onButton2Press={handleGame2ButtonPress}
+        />
+      );
+      break;
     case "GameScreen1":
       currentScreenJSX = (
         <GameScreen
@@ -52,7 +66,7 @@ export default function App() {
             handleFinisedGame1(win);
           }}
           targetColor={(color) => {
-            getGame1TargetColor(color)
+            getGame1TargetColor(color);
           }}
         />
       );
