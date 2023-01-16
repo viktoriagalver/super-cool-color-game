@@ -3,7 +3,14 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 function Button(props) {
   return(
     <Pressable onPress={props.onPress}>
-      <View style={styles.buttonContainer}>
+      <View style={{
+    backgroundColor: props.color,
+    marginBottom: 0,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingBottom: 10,
+    paddingTop: 10,
+    width: 100,}}>
         <Text style={styles.buttonText} >{props.text}</Text>
       </View>
     </Pressable>

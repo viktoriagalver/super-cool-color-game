@@ -21,8 +21,10 @@ function GameScreen2(props) {
     console.log(userInput);
     if(userInput === randomRGB) {
       console.log("WIN!!!")
+      props.wonGame2(true)
     } else {
       console.log("LOOSE!!!")
+      props.wonGame2(false)
     }
   }
 
@@ -39,7 +41,7 @@ function GameScreen2(props) {
         <ColorFieldButton color={randomRGB} />
       </View>
       <ColorInputField input1={input1} input2={input2} input3={input3} onChange1={setInput1} onChange2={setInput2} onChange3={setInput3}/>
-      <Button text='Check' onPress={handlePress}/>
+      <Button text='Check' onPress={handlePress} color={randomRGB}/>
   </View>
   );
 };
