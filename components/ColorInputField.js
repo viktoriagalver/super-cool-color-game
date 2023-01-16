@@ -1,30 +1,35 @@
 import React from "react";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 
-function ColorInputField() {
-  const [number, onChangeNumber] = React.useState(null);
+function ColorInputField(props) {
   return(
     <View style={styles.inputContainer}>
       <Text style={styles.textStyle}>rgb(</Text>
       <TextInput 
       style={styles.textInput}
-      value={number}
+      value={props.input1}
       keyboardType="numeric"
       maxLength={3}
+      onChangeText={props.onChange1}
+      selectTextOnFocus={true}
         />
         <Text style={styles.textStyle}>)(</Text>
         <TextInput 
       style={styles.textInput}
-      value={number}
+      value={props.input2}
       keyboardType="numeric"
       maxLength={3}
+      onChangeText={props.onChange2}
+      selectTextOnFocus={true}
         />
         <Text style={styles.textStyle}>)(</Text>
         <TextInput 
       style={styles.textInput}
-      value={number}
+      value={props.input3}
       keyboardType="numeric"
       maxLength={3}
+      onChangeText={props.onChange3}
+      selectTextOnFocus={true}
         />
         <Text style={styles.textStyle}>)</Text>
     </View>
@@ -33,17 +38,19 @@ function ColorInputField() {
 
 const styles = StyleSheet.create({
   inputContainer: {
-    height: 400,
+    height: 200,
     flexDirection: 'row',
     justifyContent: 'center',
   },
   textInput: {
-    backgroundColor: '#000',
+    backgroundColor: '#fff',
     width: 50,
     height: 30,
-    color: '#fff',
+    color: '#000',
     textAlign: 'center',
     fontSize: 24,
+    borderBottomColor: '#000',
+    borderBottomWidth: 1,
   },
   textStyle: {
     fontSize: 24,
