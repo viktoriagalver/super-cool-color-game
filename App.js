@@ -4,35 +4,33 @@ import GameScreen from "./screens/GameScreen";
 import GameScreen2 from "./screens/GameScreen2";
 import GameEndScreen from "./screens/GameEndScreen";
 import StartScreen from "./screens/StartScreen";
-import { useState } from "react";
-import { getRandomColor } from "./services/getRandomColor"
+import { useEffect, useState } from "react";
+import { getRandomColor } from "./services/getRandomColor";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function App() {
-
-  // get a random color
-  const randomColor = getRandomColor();
-
-  <StartScreen />
+  <StartScreen />;
   const [currentScreen, setCurrentScreen] = useState("GameScreen1"); //enter the start screen into the useState() function
   const [game1Win, setGame1Win] = useState(null);
   const [game1Streak, setGame1Streak] = useState(0);
   const [game1HighScore, setGame1Highscore] = useState(0);
+  const [randomColor, setRandomColor] = useState(getRandomColor());
 
   let currentScreenJSX;
   console.log("Render: ", currentScreen);
 
   // Load current Highscore
-  getHighScore()
-    .then((data)=> {
+  useEffect(() => {
+    getHighScore().then((data) => {
       if (isNaN(data.score)) {
         storeHighScore({ score: 0 });
         setGame1Highscore(0);
       } else {
         setGame1Highscore(data.score);
       }
-      console.log('Current Highscore: ', data.score)
-    })
+      console.log("Current Highscore: ", data.score);
+    });
+  }, []);
 
   // triggers after user presses on end screen of game 1
   const handleGameEndScreenPress = () => {
@@ -50,7 +48,7 @@ export default function App() {
       // chech for new Highscore
       if (game1HighScore < game1Streak) {
         // Save Highscore
-        storeHighScore({score: game1Streak});
+        storeHighScore({ score: game1Streak });
         setGame1Highscore(game1Streak);
       }
     } else {
@@ -63,9 +61,9 @@ export default function App() {
   };
 
   // Highscore
-  async function storeHighScore (value) {
+  async function storeHighScore(value) {
     try {
-      console.log("Storing new Highscore: ", value)
+      console.log("Storing new Highscore: ", value);
       const jsonValue = JSON.stringify(value);
       await AsyncStorage.setItem("Highscore", jsonValue);
     } catch (error) {
@@ -73,10 +71,10 @@ export default function App() {
     }
   }
 
-  async function getHighScore () {
+  async function getHighScore() {
     try {
       const value = await AsyncStorage.getItem("Highscore");
-      return JSON.parse(value)
+      return JSON.parse(value);
     } catch (error) {
       console.log("ERROR (getHighScore): ", error);
     }
@@ -108,7 +106,7 @@ export default function App() {
       );
       break;
     case "GameScreen2":
-      currentScreenJSX = <GameScreen2 color={randomColor}/>;
+      currentScreenJSX = <GameScreen2 color={randomColor} />;
       break;
   }
 
