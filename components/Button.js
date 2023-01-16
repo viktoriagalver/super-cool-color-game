@@ -1,36 +1,18 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
-function Button(props) {
+function Button() {
   return(
-    <Pressable onPress={props.onPress}>
-      <View style={{
-    backgroundColor: props.color,
-    marginBottom: 0,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingBottom: 10,
-    paddingTop: 10,
-    width: 100,}}>
-        <Text style={styles.buttonText} >{props.text}</Text>
-      </View>
-    </Pressable>
+    <View style={styles.buttonContainer}>
+      <Text></Text>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    backgroundColor: 'grey',
-    marginBottom: 0,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingBottom: 10,
-    paddingTop: 10,
-    width: 100,
-  },
-  buttonText: {
+    backgroundColor: '#000',
     color: '#fff',
-    fontSize: '20px',
-  }
+  },
 });
 
 export default Button;

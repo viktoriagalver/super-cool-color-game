@@ -17,6 +17,7 @@ export default function App() {
 
   const handleGame1ButtonPress = () => {
     setCurrentScreen("GameScreen1");
+    console.log("HAllo");
   };
   const handleGame2ButtonPress = () => {
     setCurrentScreen("GameScreen2");

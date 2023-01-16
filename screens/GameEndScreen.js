@@ -13,13 +13,11 @@ function GameEndScreen(props) {
   }
   return (
     <Pressable
-      style={[styles.canvas /* , { backgroundColor: props.color } */]}
+      style={[styles.canvas, { backgroundColor: props.color }]}
       onPress={props.handlePress}
     >
       <Text style={styles.text}>{content}</Text>
-      <Text style={styles.streak}>{streak}</Text>
-      <Text style={styles.text}>Highscore</Text>
-      <Text style={styles.streak}>{props.highScore}</Text>
+      <Text style={styles.streak}>{streak}</Text> 
     </Pressable>
   );
 }
