@@ -5,9 +5,13 @@ import GameScreen2 from "./screens/GameScreen2";
 import GameEndScreen from "./screens/GameEndScreen";
 import StartScreen from "./screens/StartScreen";
 import { useState } from "react";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { getRandomColor } from "./screens/GameScreen";
 
 export default function App() {
+
+  // get a random color
+  const randomColor = getRandomColor();
+
   <StartScreen />
   const [currentScreen, setCurrentScreen] = useState("GameScreen2"); //enter the start screen into the useState() function
   const [game1Win, setGame1Win] = useState(null);
@@ -102,7 +106,7 @@ export default function App() {
       );
       break;
     case "GameScreen2":
-      currentScreenJSX = <GameScreen2 />;
+      currentScreenJSX = <GameScreen2 color={randomColor}/>;
       break;
   }
 

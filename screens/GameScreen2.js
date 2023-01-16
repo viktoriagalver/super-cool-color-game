@@ -1,23 +1,22 @@
 import { StyleSheet, Text, View } from "react-native";
-import { getRandomColor } from "./GameScreen";
 import ColorFieldButton from "../components/ColorFieldButton";
 import ColorInputField from "../components/ColorInputField";
 import Button from "../components/Button";
 import React from "react";
 
-function GameScreen2() {
-  // get a random color
-  const randomColor = getRandomColor();
-  const randomRGB = `rgb(${randomColor.r},${randomColor.g},${randomColor.b})`;
+function GameScreen2(props) {
+
+  //get rgb color as string
+  const randomRGB = `rgb(${props.color.r},${props.color.g},${props.color.b})`;
 
   const [input1, setInput1] = React.useState('');
   const [input2, setInput2] = React.useState('');
   const [input3, setInput3] = React.useState('');
 
-  // get User Input as RGB String
+  // get User Input as rgb String
   const userInput = `rgb(${input1},${input2},${input3})`;
 
-  // check whether user input is right or wrong 
+  // check if user input is right or wrong 
   const handlePress = () => {
     console.log(userInput);
     if(userInput === randomRGB) {
