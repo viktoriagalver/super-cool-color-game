@@ -4,15 +4,28 @@ import GameScreen from "./screens/GameScreen";
 import GameScreen2 from "./screens/GameScreen2";
 import GameEndScreen from "./screens/GameEndScreen";
 import { useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function App() {
   const [currentScreen, setCurrentScreen] = useState("GameScreen1"); //enter the start screen into the useState() function
   const [game1Win, setGame1Win] = useState(null);
   const [game1Streak, setGame1Streak] = useState(0);
-  const [game1TargetColor, setGame1TargetColor] = useState(null);
+  const [game1HighScore, setGame1Highscore] = useState(0);
 
   let currentScreenJSX;
   console.log("Render: ", currentScreen);
+
+  // Load current Highscore
+  getHighScore()
+    .then((data)=> {
+      if (isNaN(data.score)) {
+        storeHighScore({ score: 0 });
+        setGame1Highscore(0);
+      } else {
+        setGame1Highscore(data.score);
+      }
+      console.log('Current Highscore: ', data.score)
+    })
 
   // triggers after user presses on end screen of game 1
   const handleGameEndScreenPress = () => {
@@ -21,11 +34,18 @@ export default function App() {
   };
 
   // triggers after the user selects a color
-  const handleFinisedGame1 = (win) => {
+  const handleFinihsedGame1 = (win) => {
     if (win) {
       // set feedback for Game End Screen
       setGame1Win(true);
       setGame1Streak(game1Streak + 1);
+
+      // chech for new Highscore
+      if (game1HighScore < game1Streak) {
+        // Save Highscore
+        storeHighScore({score: game1Streak});
+        setGame1Highscore(game1Streak);
+      }
     } else {
       // set feedback for Game End Screen
       setGame1Win(false);
@@ -35,10 +55,24 @@ export default function App() {
     setCurrentScreen("GameScreen1_End");
   };
 
-  const getGame1TargetColor = (color) => {
-    console.log(color)
-    // TODO: solve infinite loop bug
-    // setGame1TargetColor(color)
+  // Highscore
+  async function storeHighScore (value) {
+    try {
+      console.log("Storing new Highscore: ", value)
+      const jsonValue = JSON.stringify(value);
+      await AsyncStorage.setItem("Highscore", jsonValue);
+    } catch (error) {
+      console.log("ERROR (storeHighScore): ", error);
+    }
+  }
+
+  async function getHighScore () {
+    try {
+      const value = await AsyncStorage.getItem("Highscore");
+      return JSON.parse(value)
+    } catch (error) {
+      console.log("ERROR (getHighScore): ", error);
+    }
   }
 
   // manages the different app screens. The variable "currentScreen" defines the screen to be shown
@@ -47,10 +81,7 @@ export default function App() {
       currentScreenJSX = (
         <GameScreen
           wonGame1={(win) => {
-            handleFinisedGame1(win);
-          }}
-          targetColor={(color) => {
-            getGame1TargetColor(color)
+            handleFinihsedGame1(win);
           }}
         />
       );
@@ -61,6 +92,7 @@ export default function App() {
           color={"#000000"} //TODO: add color that the player is searching
           win={game1Win}
           streak={game1Streak}
+          highScore={game1HighScore}
           handlePress={() => {
             handleGameEndScreenPress();
           }}

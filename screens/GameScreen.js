@@ -14,7 +14,6 @@ function GameScreen(props) {
   }
   // get a random color to look for
   const randomColor = getRandomColor()
-  props.targetColor(colorObjectToString(randomColor))
 
   // get 3 random colors. differenceSum defines how equal/unequal they look.
   const differenceSum = 61 // max 61
