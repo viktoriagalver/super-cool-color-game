@@ -90,6 +90,7 @@ export default function App() {
           wonGame1={(win) => {
             handleFinihsedGame1(win);
           }}
+          getRandomColor={getRandomColor()}
         />
       );
       break;
