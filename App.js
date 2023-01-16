@@ -10,7 +10,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function App() {
   <StartScreen />;
-  const [currentScreen, setCurrentScreen] = useState("GameScreen1"); //enter the start screen into the useState() function
+  const [currentScreen, setCurrentScreen] = useState("StartScreen"); //enter the start screen into the useState() function
   const [game1Win, setGame1Win] = useState(null);
   const [game1Streak, setGame1Streak] = useState(0);
   const [game1HighScore, setGame1Highscore] = useState(0);

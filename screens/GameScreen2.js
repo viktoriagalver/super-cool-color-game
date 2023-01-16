@@ -4,9 +4,7 @@ import ColorFieldButton from "../components/ColorFieldButton";
 import ColorInputField from "../components/ColorInputField";
 import Button from "../components/Button";
 
-function GameScreen2() {
-  // get a random color to look for
-  const randomColor = getRandomColor();
+function GameScreen2(props) {
 
   //get rgb color as string
   const randomRGB = `rgb(${props.color.r},${props.color.g},${props.color.b})`;
