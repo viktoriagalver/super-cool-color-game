@@ -31,6 +31,12 @@ export default function App() {
       console.log("Current Highscore: ", data.score);
     });
   }, []);
+  const handleGame1ButtonPress = () => {
+    setCurrentScreen("GameScreen1");
+  };
+  const handleGame2ButtonPress = () => {
+    setCurrentScreen("GameScreen2");
+  };
 
   // triggers after user presses on end screen of game 1
   const handleGameEndScreenPress = () => {
@@ -80,13 +86,21 @@ export default function App() {
     }
   }
   const getGame1TargetColor = (color) => {
-    console.log(color)
+    console.log(color);
     // TODO: solve infinite loop bug
     // setGame1TargetColor(color)
-  }
+  };
 
   // manages the different app screens. The variable "currentScreen" defines the screen to be shown
   switch (currentScreen) {
+    case "StartScreen":
+      currentScreenJSX = (
+        <StartScreen
+          onButton1Press={handleGame1ButtonPress}
+          onButton2Press={handleGame2ButtonPress}
+        />
+      );
+      break;
     case "GameScreen1":
       currentScreenJSX = (
         <GameScreen
@@ -94,7 +108,7 @@ export default function App() {
             handleFinisedGame1(win);
           }}
           targetColor={(color) => {
-            getGame1TargetColor(color)
+            getGame1TargetColor(color);
           }}
         />
       );
