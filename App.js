@@ -9,37 +9,75 @@ import { getRandomColor } from "./services/getRandomColor";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function App() {
-  const [currentScreen, setCurrentScreen] = useState("StartScreen"); //enter the start screen into the useState() function
-  const [game1Win, setGame1Win] = useState(null);
-  const [game1Streak, setGame1Streak] = useState(0);
-  const [game1HighScore, setGame1Highscore] = useState(0);
-  const [randomColor, setRandomColor] = useState(getRandomColor());
+  /*---------------------------------------------------------------------------------- 
+  Setup
+  -----------------------------------------------------------------------------------*/
 
-  let currentScreenJSX;
+  /* component data */
+  const [currentScreen, setCurrentScreen] = useState("StartScreen"); //start app on the start screen
+  const [game1Win, setGame1Win] = useState(null); // did you win game 1?
+  const [game1Streak, setGame1Streak] = useState(0); // length of current win streak in game 1
+  const [game1HighScore, setGame1Highscore] = useState(0); // longest win streak in game 1
+  const [randomColor, setRandomColor] = useState(getRandomColor()); // get a random r,g,b color object
+
+  let currentScreenJSX; //Name(String) of current Screen
   console.log("Render: ", currentScreen);
 
-  // Load current Highscore
+  // Load current Highscore from async storage
   useEffect(() => {
     getHighScore().then((data) => {
+      // set Highscore: 0 if there is now Highscore stored
       if (isNaN(data.score)) {
+        // save in async storage
         storeHighScore({ score: 0 });
+        // save highscore in component data
         setGame1Highscore(0);
       } else {
+        // save highscore from async storage in component data
         setGame1Highscore(data.score);
       }
       console.log("Current Highscore: ", data.score);
     });
   }, []);
+
+  // Game Selection Button handler
   const handleGame1ButtonPress = () => {
+    // Change to Game 1
     setCurrentScreen("GameScreen1");
   };
   const handleGame2ButtonPress = () => {
+    // Change to Game 2
     setCurrentScreen("GameScreen2");
   };
 
-  // triggers after user presses on end screen of game 1
+  // store Highscore in async storage
+  async function storeHighScore(value) {
+    try {
+      console.log("Storing new Highscore: ", value);
+      const jsonValue = JSON.stringify(value);
+      await AsyncStorage.setItem("Highscore", jsonValue);
+    } catch (error) {
+      console.log("ERROR (storeHighScore): ", error);
+    }
+  }
+
+  // get Highscore from async storage
+  async function getHighScore() {
+    try {
+      const value = await AsyncStorage.getItem("Highscore");
+      return JSON.parse(value);
+    } catch (error) {
+      console.log("ERROR (getHighScore): ", error);
+    }
+  }
+
+  /*---------------------------------------------------------------------------------- 
+  Game 1
+  -----------------------------------------------------------------------------------*/
+
+  // Game1 End Screen Button handler
   const handleGameEndScreenPress = () => {
-    // start new game
+    // start new game 1
     setCurrentScreen("GameScreen1");
   };
 
@@ -65,30 +103,9 @@ export default function App() {
     setCurrentScreen("GameScreen1_End");
   };
 
-  // Highscore
-  async function storeHighScore(value) {
-    try {
-      console.log("Storing new Highscore: ", value);
-      const jsonValue = JSON.stringify(value);
-      await AsyncStorage.setItem("Highscore", jsonValue);
-    } catch (error) {
-      console.log("ERROR (storeHighScore): ", error);
-    }
-  }
-
-  async function getHighScore() {
-    try {
-      const value = await AsyncStorage.getItem("Highscore");
-      return JSON.parse(value);
-    } catch (error) {
-      console.log("ERROR (getHighScore): ", error);
-    }
-  }
-  const getGame1TargetColor = (color) => {
-    console.log(color);
-    // TODO: solve infinite loop bug
-    // setGame1TargetColor(color)
-  };
+  /*---------------------------------------------------------------------------------- 
+  Screen Manager
+  -----------------------------------------------------------------------------------*/
 
   // manages the different app screens. The variable "currentScreen" defines the screen to be shown
   switch (currentScreen) {
@@ -106,28 +123,31 @@ export default function App() {
           wonGame1={(win) => {
             handleFinisedGame1(win);
           }}
-          targetColor={(color) => {
-            getGame1TargetColor(color);
-          }}
+          color={getRandomColor()}
         />
       );
       break;
     case "GameScreen1_End":
       currentScreenJSX = (
         <GameEndScreen
-          color={"#000000"} //TODO: add color that the player is searching
+          color={"#000000"}
           win={game1Win}
           streak={game1Streak}
           handlePress={() => {
             handleGameEndScreenPress();
           }}
+          highscore={game1HighScore}
         />
       );
       break;
     case "GameScreen2":
-      currentScreenJSX = <GameScreen2 color={randomColor}/>;
+      currentScreenJSX = <GameScreen2 color={randomColor} />;
       break;
   }
+
+  /*---------------------------------------------------------------------------------- 
+  rendering
+  -----------------------------------------------------------------------------------*/
 
   return (
     <View style={styles.container}>
@@ -136,7 +156,7 @@ export default function App() {
       <StatusBar style="auto" />
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -144,6 +164,5 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
-  }
-})
-
+  },
+});

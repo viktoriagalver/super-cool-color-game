@@ -17,7 +17,10 @@ function GameEndScreen(props) {
       onPress={props.handlePress}
     >
       <Text style={styles.text}>{content}</Text>
-      <Text style={styles.streak}>{streak}</Text> 
+      <Text style={styles.streak}>{streak}</Text>
+
+      <Text style={styles.text}>Highscore</Text>
+      <Text style={styles.streak}>{props.highscore}</Text>
     </Pressable>
   );
 }
