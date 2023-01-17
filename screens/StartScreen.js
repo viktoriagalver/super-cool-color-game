@@ -4,7 +4,7 @@ import GameButton from "../components/GameButton";
 function StartScreen(props) {
   return (
     <View>
-      <Text style={styles.text}>Starte dein Game</Text>
+      <Text style={styles.text}>Choose a game:</Text>
       <GameButton
         onButton1Press={props.onButton1Press}
         onButton2Press={props.onButton2Press}

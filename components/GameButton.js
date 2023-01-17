@@ -5,7 +5,7 @@ function GameButton(props) {
     <View>
       <View style={styles.buttonContainer}>
         <Button
-          title={"Game 1"}
+          title={"Fun Fields"}
           style={styles.text1}
           onPress={props.onButton1Press}
           color="white"
@@ -13,7 +13,7 @@ function GameButton(props) {
       </View>
       <View style={styles.buttonContainer}>
         <Button
-          title={"Game 2"}
+          title={"Nice Numbers"}
           style={styles.text2}
           onPress={props.onButton2Press}
           color="white"
