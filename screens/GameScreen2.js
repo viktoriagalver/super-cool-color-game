@@ -1,15 +1,15 @@
-import { Text, View } from "react-native";
-import { getRandomColor, styles } from "./GameScreen";
+import { StyleSheet, Text, View } from "react-native";
 import ColorFieldButton from "../components/ColorFieldButton";
 import ColorInputField from "../components/ColorInputField";
 import Button from "../components/Button";
+import React from "react";
 
 function GameScreen2(props) {
 
   //get rgb color as string
   const randomRGB = `rgb(${props.color.r},${props.color.g},${props.color.b})`;
 
-  //button text color depending in background color
+  //button text color depending on background color
   function getTextColor() {
     if ((props.color.r + props.color.g + props.color.b) > 350) {
       return ('#000')
@@ -18,8 +18,6 @@ function GameScreen2(props) {
     }
   };
   const textColor = getTextColor();
-
-  console.log(textColor)
 
   const [input1, setInput1] = React.useState('');
   const [input2, setInput2] = React.useState('');
@@ -30,14 +28,15 @@ function GameScreen2(props) {
 
   // check if user input is right or wrong 
   const handlePress = () => {
+    setInput1('');
+    setInput2('');
+    setInput3('');
     if(userInput === randomRGB) {
       console.log("WIN!!!")
     } else {
       console.log("LOOSE!!!")
     }
   }
-
-  console.log(randomRGB);
 
   return( 
   <View style={styles.gameScreenContainer}>
@@ -54,5 +53,25 @@ function GameScreen2(props) {
   </View>
   );
 };
+
+const styles = StyleSheet.create({
+  gameScreenContainer: {
+    height: "100%",
+    flexDirection: "column",
+    flexWrap: "wrap",
+    paddingBottom: 100,
+    alignItems: 'center',
+  },
+  explanationText: {
+    fontSize: 16,
+    margin: 12
+  },
+  taskField: {
+    flex: 1,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});
 
 export default GameScreen2;
