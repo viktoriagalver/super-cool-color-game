@@ -2,32 +2,37 @@ import ColorFieldButton from "../components/ColorFieldButton";
 import { View, StyleSheet, Text } from "react-native";
 
 function GameScreen(props) {
-  // check whether user input is right or wring 
+  // handle the users color seleciton
   const handlePress = (color) => {
+    // check whether the user is right or wrong
     if(color === randomColor) {
-      console.log("WIN!!!")
+      console.log("You Win! :)")
+      // send information about the outcome to the parent component (App.js)
       props.wonGame1(true)
     } else {
-      console.log("LOOSE!!!")
-      props.wonGame1(false)
+      console.log("You Loose! :(");
+      // send information about the outcome to the parent component (App.js)
+      props.wonGame1(false);
     }
   }
   // get a random color to look for
   const randomColor = props.color
 
-  // get 3 random colors. differenceSum defines how equal/unequal they look.
+  // get 3 random colors
+  // differenceSum defines how equal/unequal they look. A high differenceSum makes the game more easy
   const differenceSum = 61 // max 61
   const disguiseColors = getAllDisguiseColors(randomColor, differenceSum)
 
-  // array with all 4 colors
+  // array with all 4 colors that the user can select from
   let colorsInField = disguiseColors
   colorsInField.push(randomColor)
 
+  // shuffle order of the color fields
   colorsInField = shuffleArray(colorsInField)
 
   return (
     <View style={styles.gameScreenContainer}>
-      {/* Task and RGB color */}
+      {/* Explain Task and show RGB color */}
       <View style={styles.taskField}>
         <Text style={styles.explanationText}>
           Welche Farbe wird hier gesucht?
@@ -71,7 +76,6 @@ function GameScreen(props) {
 // shuffles an array
 function shuffleArray(array) {
   for (var i = array.length - 1; i > 0; i--) {
-    // Generate random number
     var j = Math.floor(Math.random() * (i + 1));
 
     var temp = array[i];
@@ -88,23 +92,10 @@ function colorObjectToString(color) {
   return colorString
 }
 
-// function returns a random color object with r,g and b values between 0 and 255
-export function getRandomColor() {
-  // Generate random color gradients between 0 and max 256 (excluding 256)
-  const red = Math.floor(Math.random() * 256);
-  const green = Math.floor(Math.random() * 256);
-  const blue = Math.floor(Math.random() * 256);
 
-  return {
-    r: red,
-    g: green,
-    b: blue
-  }
-}
-
-// Get random numbers that add up to a given sum
+// Get 3 random numbers that add up to sum
 function getRandomPointsToSum(sum) {
-  // generate random points to divide a scale
+  // generate 2 random points to divide a scale into 3 sections
   let randomPoints = [];
   randomPoints.push(Math.floor(Math.random() * (sum + 1)));
   randomPoints.push(Math.floor(Math.random() * (sum + 1)));
@@ -113,71 +104,84 @@ function getRandomPointsToSum(sum) {
     return a - b;
   });
 
-  // calc length of scale
+  // calc length of the 3 sections on the scale
   const randomInt_1 = randomPoints[0];
   const randomInt_2 = randomPoints[1] - randomPoints[0];
   const randomInt_3 = sum - randomPoints[1];
 
-  // return an array of 3 random points which add up to sum
+  // return an array of 3 random points which add up to a sum
   return [randomInt_1, randomInt_2, randomInt_3];
 }
 
-// get a disguise color
+// get a color which differs for a fixed value (colorDiff[3]) from the input color
 function calcDisguiseColor (color, colorDiff) {
-  let color_result = {
+  let colorResult = {
     r: undefined,
     g: undefined,
-    b: undefined
+    b: undefined,
   };
 
-  // r value
+  // calculate r value
+  // check if addition and substraction is possible
   if (color.r - colorDiff[0] >= 0 && color.r + colorDiff[0] <= 255) {
+    // randomize addition or substraction
     const direction = Math.round(Math.random());
     if (direction < 1) {
-      color_result.r = color.r - colorDiff[0];
+      colorResult.r = color.r - colorDiff[0];
     } else {
-      color_result.r = color.r + colorDiff[0];
+      colorResult.r = color.r + colorDiff[0];
     }
-  } else if (color.r - colorDiff[0] >= 0) {
-    color_result.r = color.r - colorDiff[0];
+  }
+  // check if substraction or addition is possible
+  else if (color.r - colorDiff[0] >= 0) {
+    colorResult.r = color.r - colorDiff[0];
   } else {
-    color_result.r = color.r + colorDiff[0];
+    colorResult.r = color.r + colorDiff[0];
   }
 
-  // g value
+  // calculate g value
+  // check if addition and substraction is possible
   if (color.g - colorDiff[1] >= 0 && color.g + colorDiff[1] <= 255) {
+    // randomize addition or substraction
     const direction = Math.round(Math.random());
     if (direction < 1) {
-      color_result.g = color.g - colorDiff[1];
+      colorResult.g = color.g - colorDiff[1];
     } else {
-      color_result.g = color.g + colorDiff[1];
+      colorResult.g = color.g + colorDiff[1];
     }
-  } else if (color.g - colorDiff[1] >= 0) {
-    color_result.g = color.g - colorDiff[1];
+  }
+  // check if substraction or addition is possible
+  else if (color.g - colorDiff[1] >= 0) {
+    colorResult.g = color.g - colorDiff[1];
   } else {
-    color_result.g = color.g + colorDiff[1];
+    colorResult.g = color.g + colorDiff[1];
   }
 
-  // b value
+  // calculate b value
+  // check if addition and substraction is possible
   if (color.b - colorDiff[2] >= 0 && color.b + colorDiff[2] <= 255) {
+    // randomize addition or substraction
     const direction = Math.round(Math.random());
     if (direction < 1) {
-      color_result.b = color.b - colorDiff[2];
+      colorResult.b = color.b - colorDiff[2];
     } else {
-      color_result.b = color.b + colorDiff[2];
+      colorResult.b = color.b + colorDiff[2];
     }
-  } else if (color.b - colorDiff[2] >= 0) {
-    color_result.b = color.b - colorDiff[2];
+  }
+  // check if substraction or addition is possible
+  else if (color.b - colorDiff[2] >= 0) {
+    colorResult.b = color.b - colorDiff[2];
   } else {
-    color_result.b = color.b + colorDiff[2];
+    colorResult.b = color.b + colorDiff[2];
   }
 
-  return color_result
+  // return new color
+  return colorResult;
 }
 
 // return an array of 3 disguise colors
 function getAllDisguiseColors(color, differenceSum) {
-  // get 3 color differences
+  // get 3x 3 random points that add up to a sum
   const colorDiff_1 = getRandomPointsToSum(differenceSum);
   const colorDiff_2 = getRandomPointsToSum(2 * differenceSum);
   const colorDiff_3 = getRandomPointsToSum(3* differenceSum);
