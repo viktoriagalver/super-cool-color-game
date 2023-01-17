@@ -4,6 +4,7 @@ function GameEndScreen(props) {
   let content;
   let streak;
 
+  // check for the outcome of the last game and change the content on the screen depending on the result
   if (props.win) {
     content = "That's right! :)";
     streak = props.streak
