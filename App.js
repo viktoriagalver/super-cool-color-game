@@ -126,7 +126,7 @@ export default function App() {
       );
       break;
     case "GameScreen2":
-      currentScreenJSX = <GameScreen2 />;
+      currentScreenJSX = <GameScreen2 color={randomColor}/>;
       break;
   }
 
