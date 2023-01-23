@@ -13,7 +13,7 @@ function Button(props) {
         width: 100,}}>
       <Text style={{
         color: props.textColor,
-        fontSize: '20px',}}>
+        fontSize: 20,}}>
           {props.text}</Text>
       </View>
     </Pressable>
