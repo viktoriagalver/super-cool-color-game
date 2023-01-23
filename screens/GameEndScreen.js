@@ -49,15 +49,18 @@ const styles = StyleSheet.create({
   streak: {
     margin: 16,
     fontSize: 48,
+    color: "#ffffff",
   },
   highScore: {
     display: "flex",
     alignItems: "center",
     marginTop: 64,
+    color: "#ffffff",
   },
   button: {
     position: "absolute",
     bottom: 64,
+    color: "#ffffff",
   },
 });
 
