@@ -86,13 +86,14 @@ export default function App() {
     if (win) {
       // set feedback for Game End Screen
       setGame1Win(true);
-      setGame1Streak(game1Streak + 1);
+      const newGame1Streak = game1Streak + 1
+      setGame1Streak(newGame1Streak);
 
       // chech for new Highscore
-      if (game1HighScore < game1Streak) {
+      if (game1HighScore < newGame1Streak) {
         // Save Highscore
-        storeHighScore({ score: game1Streak });
-        setGame1Highscore(game1Streak);
+        storeHighScore({ score: newGame1Streak });
+        setGame1Highscore(newGame1Streak);
       }
     } else {
       // set feedback for Game End Screen
