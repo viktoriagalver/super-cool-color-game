@@ -49,6 +49,9 @@ export default function App() {
     // Change to Game 2
     setCurrentScreen("GameScreen2");
   };
+  const handleMenuButtonPress = () => {
+    setCurrentScreen("StartScreen");
+  }
 
   // store Highscore in async storage
   async function storeHighScore(value) {
@@ -138,6 +141,7 @@ export default function App() {
             handleGameEndScreenPress();
           }}
           highscore={game1HighScore}
+          onMenuButtonPress={handleMenuButtonPress}
         />
       );
       break;

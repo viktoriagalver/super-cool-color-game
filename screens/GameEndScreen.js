@@ -1,4 +1,4 @@
-import { Text, StyleSheet, Pressable, View } from "react-native";
+import { Text, StyleSheet, Pressable, View, Button } from "react-native";
 
 function GameEndScreen(props) {
   let content;
@@ -23,6 +23,13 @@ function GameEndScreen(props) {
         <Text style={styles.text}>Highscore</Text>
         <Text style={styles.streak}>{props.highscore}</Text>
       </View>
+      <View style={styles.button}>
+        <Button
+          title={"Menu"}
+          onPress={props.onMenuButtonPress}
+          color="white"
+        />
+      </View>
     </Pressable>
   );
 }
@@ -37,17 +44,21 @@ const styles = StyleSheet.create({
   },
   text: {
     color: "#ffffff",
-    fontSize: 24
+    fontSize: 24,
   },
   streak: {
     margin: 16,
-    fontSize: 48
+    fontSize: 48,
   },
   highScore: {
     display: "flex",
     alignItems: "center",
-    marginTop: 64
-  }
+    marginTop: 64,
+  },
+  button: {
+    position: "absolute",
+    bottom: 64,
+  },
 });
 
 export default GameEndScreen;
