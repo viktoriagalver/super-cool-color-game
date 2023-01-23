@@ -50,10 +50,23 @@ case "StartScreen":
         />
       );
 ```
-### Game Screen 1
+### Game Screen 1 (Fun Fields)
+Der Service "getRandomColor.js" generiert ein zufälliges rgb object.
+Die function "getRandomPointsToSum(sum)" generiert 3 zufällige Werte, die sich zur Summe (sum) aufaddieren.
+Je größer die Variable sum ist, desto einfacher ist das Spiel.
+Die von "getRandomPointsToSum(sum)" generierten Werte, werden auf die rgb Werte des objects aus getRandomColor() addiert/subtrahiert.
+"getRandomPointsToSum(sum)" wird 3 mal ausgeführt, wobei sich sum jedesmal linear erhöht.
+Dadurch wurden 3 falsche (aber ähnliche Farben) generiert. Diese werden gemeinsam mit der Farbe aus "getRandomColor()" in einem array gespeichert.
+Im Anschluss wird die Reihenfolge der items im array von shuffleArray(array) randomisiert.
+Die Farben im Array werden nun von React in die "ColorFieldButton" component gerendert.
+
 ### Game Screen 2
 ### End Game
+Abhängig vom Ergebnis (Gewonnen oder Verloren) werden im EndScreen unterschiedliche Inhalte gerendert, die dem Spieler Feedback über seine Leistung geben.
+Im Game Screen 1 wird außerdem der HighScore dargestellt.
 ### Highscore
+Um ein permanentes Speichern des HighScores zu ermöglichen wird der "AsyncStorage" aus "@react-native-async-storage/async-storage" verwendet.
+Beim Start der Anwendung wird der Highscore abgefragt und in einer Variable gespeichert. Da im Anschluss diese Variable genutzt werden kann, können lange Ladezeiten, die beim Zugriff auf den AsyncStorage auftreten, verhindert werden. Wenn ein neuer Highscore aufgestellt wird, wird der aktualisierte Wert im permanenten AsyncStorage gespeichert.
 ## Future Work 
 Wir wollen zusätzlich die letzten Stufen umsetzen.
 
