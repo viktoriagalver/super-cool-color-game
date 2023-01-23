@@ -107,12 +107,21 @@ export default function App() {
     setCurrentScreen("GameScreen1_End");
   };
 
+  /*---------------------------------------------------------------------------------- 
+  Game 1
+  -----------------------------------------------------------------------------------*/
+  // Game1 End Screen Button handler
+  const handleGameEndScreen2Press = () => {
+    // start new game 1
+    setCurrentScreen("GameScreen2");
+  };
+
   // triggers after the user confirms a color
   const handleFinisedGame2 = (win) => {
     // set feedback for Game End Screen
     setGameWin(win);
     // change to Game End Screen
-    setCurrentScreen("GameScreen1_End");
+    setCurrentScreen("GameScreen2_End");
   };
 
   /*---------------------------------------------------------------------------------- 
@@ -147,6 +156,19 @@ export default function App() {
           streak={game1Streak}
           handlePress={() => {
             handleGameEndScreenPress();
+          }}
+          highscore={game1HighScore}
+          onMenuButtonPress={handleMenuButtonPress}
+        />
+      );
+      break;
+    case "GameScreen2_End":
+      currentScreenJSX = (
+        <GameEndScreen
+          color={"#000000"}
+          win={gameWin}
+          handlePress={() => {
+            handleGameEndScreen2Press();
           }}
           highscore={game1HighScore}
           onMenuButtonPress={handleMenuButtonPress}
