@@ -3,13 +3,13 @@ Dies ist unser Semesterprojekt in dem Fach: Hybride-App-Entwicklung.
 Jeder Mensch hat ein anderes Farbverständnis und mit diesem Game wollen wir diese Fähigkeit verstärken. 
 
 Wir wollten es in fünf Stufen umsetzen: 
-- der Nutzer erhält den RGB Wert und kann aus vier verschiedene Farben wählen, welche die richtige ist
-- der Nutzer erhält die Farbe und muss nun den RGB Wert schätzen. Zusätzlich bewertet die App die Leistung.
-- als nächsten wollten wir einen Casual & Ranking Mode einfügen und ein Scoreboard
-- ebenso wollten wir einen Multiplayer Scoreboard einfügen 
-- als letztes wollten wir einen Multiplayer als Herausforderung
+1. der Nutzer erhält den RGB Wert und kann aus vier verschiedene Farben wählen, welche die richtige ist
+2. der Nutzer erhält die Farbe und muss nun den RGB Wert schätzen. Zusätzlich bewertet die App die Leistung.
+3. als nächsten wollten wir einen Casual & Ranking Mode einfügen und ein Scoreboard
+4. ebenso wollten wir einen Multiplayer Scoreboard einfügen 
+5. als letztes wollten wir einen Multiplayer als Herausforderung
 
-In der Zeit haben wir nur die ersten 2 Stufen umgesetzt. 
+In der Zeit haben wir nur die ersten 3 Stufen umgesetzt. 
 
 ## Benutzung
 ### Project setup
