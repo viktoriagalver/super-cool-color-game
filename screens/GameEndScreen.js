@@ -1,4 +1,4 @@
-import { Text, StyleSheet, Pressable } from "react-native";
+import { Text, StyleSheet, Pressable, View } from "react-native";
 
 function GameEndScreen(props) {
   let content;
@@ -19,9 +19,10 @@ function GameEndScreen(props) {
     >
       <Text style={styles.text}>{content}</Text>
       <Text style={styles.streak}>{streak}</Text>
-
-      <Text style={styles.text}>Highscore</Text>
-      <Text style={styles.streak}>{props.highscore}</Text>
+      <View style={styles.highScore}>
+        <Text style={styles.text}>Highscore</Text>
+        <Text style={styles.streak}>{props.highscore}</Text>
+      </View>
     </Pressable>
   );
 }
@@ -41,6 +42,11 @@ const styles = StyleSheet.create({
   streak: {
     margin: 16,
     fontSize: 48
+  },
+  highScore: {
+    display: "flex",
+    alignItems: "center",
+    marginTop: 64
   }
 });
 
