@@ -35,8 +35,10 @@ function GameScreen2(props) {
     setInput3('');
     if(userInput === randomRGB) {
       console.log("WIN!!!")
+      props.wonGame2(true);
     } else {
       console.log("LOOSE!!!")
+      props.wonGame2(false);
     }
   }
 

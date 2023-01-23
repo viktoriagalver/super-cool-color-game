@@ -15,7 +15,7 @@ export default function App() {
 
   /* component data */
   const [currentScreen, setCurrentScreen] = useState("StartScreen"); //start app on the start screen
-  const [game1Win, setGame1Win] = useState(null); // did you win game 1?
+  const [gameWin, setGameWin] = useState(null); // did you win game 1?
   const [game1Streak, setGame1Streak] = useState(0); // length of current win streak in game 1
   const [game1HighScore, setGame1Highscore] = useState(0); // longest win streak in game 1
   const [randomColor, setRandomColor] = useState(getRandomColor()); // get a random r,g,b color object
@@ -51,7 +51,7 @@ export default function App() {
   };
   const handleMenuButtonPress = () => {
     setCurrentScreen("StartScreen");
-  }
+  };
 
   // store Highscore in async storage
   async function storeHighScore(value) {
@@ -88,8 +88,8 @@ export default function App() {
   const handleFinisedGame1 = (win) => {
     if (win) {
       // set feedback for Game End Screen
-      setGame1Win(true);
-      const newGame1Streak = game1Streak + 1
+      setGameWin(true);
+      const newGame1Streak = game1Streak + 1;
       setGame1Streak(newGame1Streak);
 
       // chech for new Highscore
@@ -100,9 +100,17 @@ export default function App() {
       }
     } else {
       // set feedback for Game End Screen
-      setGame1Win(false);
+      setGameWin(false);
       setGame1Streak(0);
     }
+    // change to Game End Screen
+    setCurrentScreen("GameScreen1_End");
+  };
+
+  // triggers after the user confirms a color
+  const handleFinisedGame2 = (win) => {
+    // set feedback for Game End Screen
+    setGameWin(win);
     // change to Game End Screen
     setCurrentScreen("GameScreen1_End");
   };
@@ -135,7 +143,7 @@ export default function App() {
       currentScreenJSX = (
         <GameEndScreen
           color={"#000000"}
-          win={game1Win}
+          win={gameWin}
           streak={game1Streak}
           handlePress={() => {
             handleGameEndScreenPress();
@@ -146,7 +154,14 @@ export default function App() {
       );
       break;
     case "GameScreen2":
-      currentScreenJSX = <GameScreen2 color={randomColor} />;
+      currentScreenJSX = (
+        <GameScreen2
+          color={randomColor}
+          wonGame2={(win) => {
+            handleFinisedGame2(win);
+          }}
+        />
+      );
       break;
   }
 
