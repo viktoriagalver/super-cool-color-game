@@ -1,5 +1,6 @@
 import ColorFieldButton from "../components/ColorFieldButton";
 import { View, StyleSheet, Text } from "react-native";
+import colorObjectToString from "../services/colorObjectToString";
 
 function GameScreen(props) {
   // handle the users color seleciton
@@ -85,13 +86,6 @@ function shuffleArray(array) {
 
   return array;
 }
-
-// converts color object to rgb() string
-function colorObjectToString(color) {
-  const colorString = "rgb(" + color.r + "," + color.g + "," + color.b + ")"
-  return colorString
-}
-
 
 // Get 3 random numbers that add up to sum
 function getRandomPointsToSum(sum) {

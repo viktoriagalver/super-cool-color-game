@@ -3,11 +3,13 @@ import ColorFieldButton from "../components/ColorFieldButton";
 import ColorInputField from "../components/ColorInputField";
 import Button from "../components/Button";
 import React from "react";
+import colorObjectToString from "../services/colorObjectToString";
 
 function GameScreen2(props) {
 
   //get rgb color as string
-  const randomRGB = `rgb(${props.color.r},${props.color.g},${props.color.b})`;
+
+  const randomRGB = colorObjectToString(props.color)
 
   //button text color depending on background color
   function getTextColor() {
