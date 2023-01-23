@@ -7,6 +7,7 @@ import StartScreen from "./screens/StartScreen";
 import { useEffect, useState } from "react";
 import { getRandomColor } from "./services/getRandomColor";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import GameEndScreen2 from "./screens/GameEndScreen2";
 
 export default function App() {
   /*---------------------------------------------------------------------------------- 
@@ -164,7 +165,7 @@ export default function App() {
       break;
     case "GameScreen2_End":
       currentScreenJSX = (
-        <GameEndScreen
+        <GameEndScreen2
           color={"#000000"}
           win={gameWin}
           handlePress={() => {
@@ -178,7 +179,7 @@ export default function App() {
     case "GameScreen2":
       currentScreenJSX = (
         <GameScreen2
-          color={randomColor}
+          color={getRandomColor()}
           wonGame2={(win) => {
             handleFinisedGame2(win);
           }}
