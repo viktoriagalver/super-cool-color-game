@@ -53,6 +53,7 @@ case "StartScreen":
 ### Game Screen 1
 ### Game Screen 2
 ### End Game
+### Highscore
 ## Future Work 
 Wir wollen zusätzlich die letzten Stufen umsetzen.
 
