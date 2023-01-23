@@ -81,6 +81,8 @@ export default function App() {
 
   // Game1 End Screen Button handler
   const handleGameEndScreenPress = () => {
+    //get new random color
+    setRandomColor(getRandomColor());
     // start new game 1
     setCurrentScreen("GameScreen1");
   };
@@ -113,6 +115,7 @@ export default function App() {
   -----------------------------------------------------------------------------------*/
   // Game1 End Screen Button handler
   const handleGameEndScreen2Press = () => {
+    setRandomColor(getRandomColor());
     // start new game 1
     setCurrentScreen("GameScreen2");
   };
@@ -145,14 +148,14 @@ export default function App() {
           wonGame1={(win) => {
             handleFinisedGame1(win);
           }}
-          color={getRandomColor()}
+          color={randomColor}
         />
       );
       break;
     case "GameScreen1_End":
       currentScreenJSX = (
         <GameEndScreen
-          color={"#000000"}
+          color={randomColor}
           win={gameWin}
           streak={game1Streak}
           handlePress={() => {
@@ -166,7 +169,7 @@ export default function App() {
     case "GameScreen2_End":
       currentScreenJSX = (
         <GameEndScreen2
-          color={"#000000"}
+          color={randomColor}
           win={gameWin}
           handlePress={() => {
             handleGameEndScreen2Press();
@@ -179,7 +182,7 @@ export default function App() {
     case "GameScreen2":
       currentScreenJSX = (
         <GameScreen2
-          color={getRandomColor()}
+          color={randomColor}
           wonGame2={(win) => {
             handleFinisedGame2(win);
           }}
