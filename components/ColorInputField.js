@@ -43,7 +43,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   textInput: {
-    backgroundColor: '#fff',
     width: 50,
     height: 30,
     color: '#000',
