@@ -68,7 +68,7 @@ Im Game Screen 1 wird außerdem der HighScore dargestellt.
 Um ein permanentes Speichern des HighScores zu ermöglichen wird der "AsyncStorage" aus "@react-native-async-storage/async-storage" verwendet.
 Beim Start der Anwendung wird der Highscore abgefragt und in einer Variable gespeichert. Da im Anschluss diese Variable genutzt werden kann, können lange Ladezeiten, die beim Zugriff auf den AsyncStorage auftreten, verhindert werden. Wenn ein neuer Highscore aufgestellt wird, wird der aktualisierte Wert im permanenten AsyncStorage gespeichert.
 ## Future Work 
-Wir wollen zusätzlich die letzten Stufen umsetzen.
+Wir wollen an unseren letzten Punkten weiterarbeiten, nämlich den Multiplayer einführen und das dazugehörige Scoreboard einfügen. Beim Multiplayer wollen wir dann noch die Herausforderung hinzufügen.
 
 
 
